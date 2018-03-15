@@ -59,7 +59,8 @@ public class QueueCustomer {
         Connection connection = connectionFactory.createConnection();
         connection.setClientID("0002");
         connection.start();
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+//        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        Session session = connection.createSession(true, Session.SESSION_TRANSACTED);   //事务方式性能会高几百倍，但session要commit
 
         Topic topic = session.createTopic("topic-test-persist3");
         TopicSubscriber consumer = session.createDurableSubscriber(topic, "haha");
@@ -73,6 +74,7 @@ public class QueueCustomer {
         });
 //        System.in.read();
         consumer.close();
+        session.commit();
         session.close();
         connection.close();
     }

@@ -6,11 +6,12 @@ import org.junit.Test;
 import javax.jms.*;
 
 /**
- * 测试发现：session使用事务机制比自动应答机制快50被以上。先留着这个问题
+ * 测试发现：session使用事务机制比自动应答机制快50倍以上。先留着这个问题
  * xuan
  * 2018/3/5
  */
 public class QueueProducer {
+
     @Test
     public void testQueue() throws JMSException {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
